@@ -90,7 +90,7 @@ namespace Xylena {
 
 				GameObjectPtr currentObject = stageObjects.at(stageObjectIndex);
                 
-                if (!cullOutOfFrame || currentObject->getLocation()->isWithin2DBounds(cameraBounds)) {
+                if ((!cullOutOfFrame || currentObject->getLocation()->isWithin2DBounds(cameraBounds)) && currentObject->isVisible()) {
                     
                     addGameObjectToMap(currentObject);
                 }
@@ -130,7 +130,9 @@ namespace Xylena {
                         for (size_t i = 0; i < objectVector.size(); i++) {
 
                             GameObjectPtr gameObject = objectVector[i];
-
+                            
+                            
+                            
                             //if (!component) {
                                 //component = gameObject->getRenderComponent();
                                 
