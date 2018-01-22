@@ -22,7 +22,7 @@ namespace Xylena {
         ~Mouse() {};
 
         static void registerWindow(Window *window);
-        static void setPosValues(double x, double y);
+        static void setPosValues(GLFWwindow *window, double x, double y);
 
         static void setMousePosition(Window *window, double x, double y);
         static void setMousePosition(double x, double y);
