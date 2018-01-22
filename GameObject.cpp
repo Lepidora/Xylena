@@ -14,6 +14,8 @@
 #include "Mouse.h"
 #include "StageCamera.h"
 #include "EventHandler.h"
+#include "LuaHandler.h"
+#include "Transaction.h"
 
 namespace Xylena {
     
@@ -30,12 +32,17 @@ namespace Xylena {
         setTextureOffset(0.0, 0.0);
         setTextureRotation(0.0);
         
-        
         //printf("UID: %lu\n", uidCounter);
         
         uid = GameObject::uidCounter;
         GameObject::uidCounter++;
         
+    }
+    
+    GameObject::GameObject(std::string scriptLocation): GameObject() {
+        script = ScriptPtr(new Script(scriptLocation));
+        initialise();
+        callScriptFunction(createSelector);
     }
     
     GameObject::~GameObject() {
@@ -54,7 +61,9 @@ namespace Xylena {
 	void GameObject::preUpdate() {}
 
 	//Main update method. Most code should be here
-	void GameObject::update() {}
+	void GameObject::update() {
+        callScriptFunction(getSelector("update"));
+    }
 
 	//Allows for performing additional actions after update
 	void GameObject::postUpdate() {}
@@ -129,10 +138,15 @@ namespace Xylena {
         float dotProduct = (normalisedMouseX * normalisedObjectX) + (normalisedMouseY * normalisedObjectY);
         float determinant = (normalisedMouseX * normalisedObjectY) - (normalisedMouseY * normalisedObjectX);
 
-        float angle = std::atan2(determinant, dotProduct);
-        float degreeAngle = angle * (180 / M_PI);
-
-        setRotation(180 - degreeAngle);
+        float offsetAngle = std::atan2(dotProduct, determinant);
+        float offsetDegreeAngle = offsetAngle * (180 / M_PI);
+        float degreeAngle = offsetDegreeAngle;
+        setRotation(degreeAngle);
+        
+        //printf("Mouse: x: %g, y: %g\n", mouseX, mouseY);
+        //printf("World: x: %g, y: %g\n", mouseX, mouseY);
+        //printf("Offset: %g\n", offsetDegreeAngle);
+        //printf("Angle: %g\n", degreeAngle);
         
     }
     
@@ -143,5 +157,28 @@ namespace Xylena {
     void GameObject::mouseOver(double mouseX, double mouseY, bool top) {};
     void GameObject::mouseEnter(double mouseX, double mouseY, bool top) {};
     void GameObject::mouseLeave(double mouseX, double mouseY, bool top) {};
+    
+    void GameObject::initialise() {
+        
+        void (GameObject::*translatePositionFptr)(float, float) = &GameObject::translatePosition;
+        bool (GameObject::*getVisibilityFptr)() = &GameObject::isVisible;
+        void (GameObject::*setVisibilityFptr)(bool) = &GameObject::setVisibility;
+        void (GameObject::*setRotationFptr)(double) = &GameObject::setRotation;
+        double (GameObject::*getRotationFptr)() = &GameObject::getRotation;
+        
+        StatePtr st = script->getState();
+        //script->test(1);
+        
+        script->addObject(std::string("self"), *this,
+                          "getVisibility", getVisibilityFptr,
+                          "setVisibility", setVisibilityFptr,
+                          "translatePosition", translatePositionFptr,
+                          "setRotation", setRotationFptr,
+                          "getRotation", getRotationFptr
+                          );
+        
+        createSelector = getSelector("create");
+        updateSelector = getSelector("update");
+    }
 
 }

@@ -8,6 +8,7 @@
 #include "Texture.h"
 #include "GLTypes.h"
 #include "InputEvent.h"
+#include "Scriptable.h"
 
 //Component includes
 #include "RenderComponent.h"
@@ -18,9 +19,13 @@ namespace Xylena {
 	class Stage;
 	typedef std::shared_ptr<Stage> StagePtr;
 
-	class GameObject {
+    class GameObject: public Scriptable {
     private:
         static unsigned long int uidCounter;
+        
+        ///Script selectors
+        SelectorPtr createSelector;
+        SelectorPtr updateSelector;
 	protected:
         
         unsigned long int uid;
@@ -31,7 +36,7 @@ namespace Xylena {
 		TexturePtr texture;
 
         ///Rotation values in degrees
-        float objectRotation;
+        double objectRotation;
         float textureRotation;
 
         ///Offset from the object's position that the texture should be rendered
@@ -49,7 +54,10 @@ namespace Xylena {
         InputComponent *inputComponent;
 
 	public:
+        
         GameObject();
+        GameObject(std::string luaScript);
+        
         ~GameObject();
 
 		///Visibility setting
@@ -90,8 +98,9 @@ namespace Xylena {
         Coordinate getSize();
 
         ///Get/set object rotation
-        void setRotation(float rotation) { objectRotation = rotation; };
-        float getRotation() { return objectRotation; };
+        void setRotation(double rotation) { objectRotation = rotation; };
+        double getRotation() { return objectRotation; };
+        double getVisualRotation() { return objectRotation - 90; };
 
         ///Get/set texture rotation
         void setTextureRotation(float rotation) { textureRotation = rotation; };
@@ -150,6 +159,8 @@ namespace Xylena {
         //Called when the mouse leaves the object's bounding box
         virtual void mouseLeave(double mouseX, double mouseY, bool top);
         
+        ///Scripting functions
+        virtual void initialise();
 
 	};
 
