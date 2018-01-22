@@ -27,7 +27,7 @@ namespace Xylena {
         
     }
 
-    const float textureVertices[]{
+    const float textureVertices[] {
         //  X      Y     Z       U      V
         -1.0f,  1.0f, 0.0f,   0.0f, 1.0f,
         -1.0f, -1.0f, 0.0f,   0.0f, 0.0f,
@@ -41,8 +41,6 @@ namespace Xylena {
     };
 
     void SpriteRenderComponent::initRenderer() {
-    
-        //printf("Function: %p\n", (void *)&glGenVertexArrays);
 
         VAO textureArrayID;
         glGenVertexArrays(1, &textureArrayID);
@@ -121,7 +119,7 @@ namespace Xylena {
 
         float viewportX = viewport.getX();
         float viewportY = viewport.getY();
-        ortho = glm::ortho(0.0f, viewportX * scalingFactor, viewportY * scalingFactor, 0.0f, -1.0f, 1.0f);
+        ortho = glm::ortho(0.0f, viewportX * scalingFactor, 0.0f, viewportY * scalingFactor, -1.0f, 1.0f);
         //ortho = glm::ortho((float)(viewportX * scalingFactor * 1.5), (float)(viewportX * scalingFactor * 0.5), (float)(viewportY * scalingFactor * 0.5), (float)(viewportY * scalingFactor * 1.5), -1.0f, 1.0f);
 
         //printf("");
@@ -161,7 +159,7 @@ namespace Xylena {
 
         StageCameraPtr stageCamera = StageHandler::getCurrentStage()->getActiveCamera();
 
-        float objectRotation = gameObject->getRotation();
+        float objectRotation = gameObject->getVisualRotation();
         float textureRotation = gameObject->getTextureRotation();
 
         float rotationSum = objectRotation + textureRotation;
