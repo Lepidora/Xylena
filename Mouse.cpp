@@ -7,7 +7,7 @@
 #include "StageCamera.h"
 
 void cursorPosCallback(GLFWwindow *window, double x, double y) {
-    Xylena::Mouse::setPosValues(x, y);
+    Xylena::Mouse::setPosValues(window, x, y);
 }
 
 namespace Xylena {
@@ -18,26 +18,40 @@ namespace Xylena {
     std::vector<GameObjectPtr> Mouse::previousObjects;
 
     void Mouse::queryMousePos() {
+        
         double x;
         double y;
+        
+        int width;
+        int height;
 
-        glfwGetCursorPos(WindowHandler::getMainWindowGLPointer(), &x, &y);
+        GLFWwindow *mainWindow = WindowHandler::getMainWindowGLPointer();
+        
+        glfwGetWindowSize(mainWindow, &width, &height);
+        glfwGetCursorPos(mainWindow, &x, &y);
 
         xPos = x;
-        yPos = y;
+        yPos = -(y - height);
     }
 
     void Mouse::registerWindow(Window *window) {
         glfwSetCursorPosCallback(window->getGLFWwindowPtr().get() , cursorPosCallback);
     }
 
-    void Mouse::setPosValues(double x, double y) {
+    void Mouse::setPosValues(GLFWwindow *window, double x, double y) {
+        
+        int width;
+        int height;
+        
+        glfwGetWindowSize(window, &width, &height);
+        
         xPos = x;
-        yPos = y;
+        yPos = -(y - height);
+        
     }
 
     void Mouse::setMousePosition(Window * window, double x, double y) {
-        glfwGetCursorPos(window->getGLFWwindowPtr().get(), &x, &y);
+        glfwSetCursorPos(window->getGLFWwindowPtr().get(), x, y);
     }
 
     void Mouse::setMousePosition(double x, double y) {
