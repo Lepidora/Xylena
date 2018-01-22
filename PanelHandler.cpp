@@ -2,12 +2,8 @@
 
 namespace Xylena {
     
-    PanelPtr PanelHandler::parsePanelFromFile(std::string filename) {
-        
-        
-        
-        return nullptr;
-        
+    PanelPtr PanelHandler::createPanel(std::string filename) {
+        return PanelPtr(new Panel(filename));
     }
     
 }

@@ -5,13 +5,16 @@
 
 //Local includes
 #include "Panel.h"
+#include "Script.h"
 
 namespace Xylena {
     
     class PanelHandler {
+    private:
+        static void addPanelToScript(ScriptPtr script, PanelPtr panel);
     public:
         
-        static PanelPtr parsePanelFromFile(std::string filename);
+        static PanelPtr createPanel(std::string filename);
         
     };
 }
