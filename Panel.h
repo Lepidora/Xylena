@@ -3,10 +3,12 @@
 //System includes
 #include <vector>
 #include <memory>
+#include <string>
 
 //Local includes
 #include "RenderComponent.h"
 #include "Texture.h"
+#include "Scriptable.h"
 
 namespace Xylena {
     
@@ -25,7 +27,7 @@ namespace Xylena {
     class Panel;
     typedef std::shared_ptr<Panel> PanelPtr;
     
-    class Panel {
+    class Panel: public Scriptable {
     private:
         std::vector<PanelPtr> children;
         
@@ -41,11 +43,15 @@ namespace Xylena {
         
         RenderComponent *component;
         
+        SelectorPtr createSelector;
+        
     public:
         
         Panel();
+        Panel(std::string filename);
         
         void setAnchor(Anchor a);
+        void setAnchor(std::string s);
         
         void setXAnchor(float x);
         void setYAnchor(float y);
@@ -73,11 +79,14 @@ namespace Xylena {
         void setOpacity(float _opacity);
         float getOpacity();
         
-        void setBackgroundImage(TexturePtr tex);
+        void setBackgroundTexture(TexturePtr tex);
+        void setBackgroundImage(char * filename);
         TexturePtr getBackgroundImage();
         
         void setRenderComponent(RenderComponent *component);
         RenderComponent *getRenderComponent();
+        
+        void initialise();
         
     };
 }
