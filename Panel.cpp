@@ -1,5 +1,7 @@
 #include "Panel.h"
 
+#include "TextureHandler.h"
+
 namespace Xylena {
     
     Panel::Panel() {
@@ -8,6 +10,11 @@ namespace Xylena {
         opacity = 1.0;
         backgroundTexture = nullptr;
         component = nullptr;
+    }
+    
+    Panel::Panel(std::string scriptLocation): Panel() {
+        script = ScriptPtr(new Script(scriptLocation));
+        initialise();
     }
     
     std::vector<PanelPtr>::iterator Panel::findPanel(PanelPtr panel) {
@@ -149,7 +156,12 @@ namespace Xylena {
         return opacity;
     }
     
-    void Panel::setBackgroundImage(TexturePtr tex) {
+    void Panel::setBackgroundTexture(TexturePtr tex) {
+        backgroundTexture = tex;
+    }
+    
+    void Panel::setBackgroundImage(char * filename) {
+        TexturePtr tex = TexturePtr(TextureHandler::createTextureFromFile(filename));
         backgroundTexture = tex;
     }
     
@@ -163,6 +175,38 @@ namespace Xylena {
     
     RenderComponent * Panel::getRenderComponent() {
         return component;
+    }
+    
+    void Panel::initialise() {
+        
+        void (Panel::*setAnchorFptr)(std::string) = &Panel::setAnchor;
+        void (Panel::*setXAnchorFptr)(float) = &Panel::setXAnchor;
+        void (Panel::*setYAnchorFptr)(float) = &Panel::setYAnchor;
+        void (Panel::*setXYAnchorFptr)(float, float) = &Panel::setAnchor;
+        
+        float (Panel::*getXAnchorFptr)() = &Panel::getXAnchor;
+        float (Panel::*getYAnchorFptr)() = &Panel::getYAnchor;
+        
+        void (Panel::*setOpacityFptr)(float) = &Panel::setOpacity;
+        float (Panel::*getOpacityFptr)() = &Panel::getOpacity;
+              
+        
+        script->addObject("self", *this,
+                          "setAnchor", setAnchorFptr,
+                          "setXAnchor", setXAnchorFptr,
+                          "setYAnchor", setYAnchorFptr,
+                          "setXYAnchor", setXYAnchorFptr,
+                          
+                          "getXAnchor", getXAnchorFptr,
+                          "getYAnchor", getYAnchorFptr,
+                          
+                          "setOpacity", setOpacityFptr,
+                          "getOpacity", getOpacityFptr
+                          );
+        
+        createSelector = getSelector("create");
+        callScriptFunction(createSelector);
+        
     }
 
 }
