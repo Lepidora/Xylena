@@ -37,7 +37,6 @@ namespace Xylena {
 
     std::vector<unsigned char> TextureHandler::convertIntArrayToVector(unsigned char * data, int pixelcount, int bitdepth) {
 
-        ///Calculate the number of bytes needed in the vector
         unsigned int byteCount = pixelcount * bitdepth;
 
         ///Construct the vector and manually reserve enough space to put all of the pixel data into
@@ -59,7 +58,6 @@ namespace Xylena {
         std::vector<unsigned char> tempdata;
         tempdata.reserve(pixelcount * 4);
 
-        ///Loop through each pixel in the data
         for (size_t pixelindex = 0; pixelindex < pixelcount; pixelindex++) {
 
             ///Calculate the initial positions for each pixel in the input data by multiplying the current pixel by the bit depth of the data set
@@ -142,13 +140,12 @@ namespace Xylena {
         }
 
         ///Flip the data vertically so that it works with OpenGL's texture coordinate system
-        //data = flipVertically(data, width, height);
+        data = flipVertically(data, width, height);
 
         ///Create a new texture and generate a buffer for it
         TextureImage textureID;
         glGenTextures(1, &textureID);
         
-        ///Bind the created texture 
         glBindTexture(GL_TEXTURE_2D, textureID);        
 
         ///Makes sure only RGBA data is used. Greyscale images are not currently supported
@@ -179,7 +176,6 @@ namespace Xylena {
         TextureImage textureID;
         glGenTextures(1, &textureID);
         
-        ///Bind the created texture
         glBindTexture(GL_TEXTURE_2D, textureID);
         
         ///Makes sure only RGBA data is used. Greyscale images are not currently supported
