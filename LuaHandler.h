@@ -6,6 +6,9 @@
 //Library includes
 #include <selene.h>
 
+//Local includes
+#include "State.h"
+
 namespace Xylena {
     
     using namespace sel;
@@ -14,17 +17,14 @@ namespace Xylena {
     private:
         static std::unordered_map<std::string, std::string *> filemap;
         
-        std::string * loadThroughCache(std::string filename);
+        static std::string * loadThroughCache(std::string filename);
     public:
         
-        void reloadScripts();
+        static void reloadScripts();
         
-        State loadFile(std::string filename, bool libs);
+        static StatePtr loadFile(std::string filename, bool libs);
         
-        template<typename O, typename... Fs>
-        void addObject(State state, std::string name, O object, Fs... functions);
-        
-        template<typename I>
-        void registerItem(State state, std::string itemName, I item);
+        static StatePtr getNewState();
+        static StatePtr getNewState(lua_State *luaState);
     };
 }
