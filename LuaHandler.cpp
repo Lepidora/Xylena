@@ -31,7 +31,7 @@ namespace Xylena {
         filemap.clear();
     }
     
-    State LuaHandler::loadFile(std::string filename, bool libs) {
+    StatePtr LuaHandler::loadFile(std::string filename, bool libs) {
         
         lua_State *luaState = luaL_newstate();
         
@@ -55,18 +55,17 @@ namespace Xylena {
             return nullptr;
         }
         
-        State state(luaState);
+        StatePtr state = getNewState(luaState);
         return state;
     }
     
-    template<typename O, typename... Fs>
-    void LuaHandler::addObject(State state, std::string name, O object, Fs... functions) {
-        state[name.c_str()].SetObj(object, functions...);
+    StatePtr LuaHandler::getNewState() {
+        return StatePtr(new State(true));
     }
     
-    template<typename I>
-    void LuaHandler::registerItem(sel::State state, std::string name, I item) {
-        state[name.c_str()] = item;
+    StatePtr LuaHandler::getNewState(lua_State *luaState) {
+        return StatePtr(new State(luaState));
     }
+    
     
 }
