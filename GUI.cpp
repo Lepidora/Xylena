@@ -10,7 +10,7 @@ namespace Xylena {
     
     void GUI::render() {
         if (currentPanel) {
-            
+            currentPanel->getRenderComponent();
         }
     }
     
