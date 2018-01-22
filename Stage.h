@@ -6,6 +6,10 @@
 #include <map>
 
 //Local includes
+#include "Transaction.h"
+
+//Transaction definitions
+#define MakeTransaction(object,data) std::bind(
 
 namespace Xylena {
 
@@ -20,6 +24,9 @@ namespace Xylena {
 		std::vector<GameObjectPtr> gameObjects;
 		StageCameraPtr activeCamera;
         std::vector<GameObject *> removalQueue;
+        
+        ///Transactions
+        std::vector<Transaction *> transactions;
         
         ///Method to load resources necessary for a stage to exist
         virtual void load() {};
@@ -38,6 +45,10 @@ namespace Xylena {
 		///Object retrieval
 		std::vector<GameObjectPtr> getObjects();
 		StageCameraPtr getActiveCamera() { return activeCamera; };
+        
+        ///Transactions
+        void submitTransaction(Transaction *transaction);
+        void executeTransactions();
 	};
 
 	//Typedefs

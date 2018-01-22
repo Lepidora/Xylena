@@ -58,4 +58,15 @@ namespace Xylena {
         removalQueue.clear();
         
     }
+    
+    void Stage::submitTransaction(Xylena::Transaction *transaction) {
+        transactions.push_back(transaction);
+    }
+    
+    void Stage::executeTransactions() {
+        for (auto it = transactions.begin(); it != transactions.end(); it++) {
+            Transaction *transaction = *it;
+            transaction->execute();
+        }
+    }
 }
