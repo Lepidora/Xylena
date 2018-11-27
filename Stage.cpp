@@ -56,7 +56,6 @@ namespace Xylena {
         }
         
         removalQueue.clear();
-        
     }
     
     void Stage::submitTransaction(Xylena::Transaction *transaction) {

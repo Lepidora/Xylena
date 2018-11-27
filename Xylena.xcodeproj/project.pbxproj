@@ -15,6 +15,7 @@
 		0D26E9E71F19894D004C9512 /* Job.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D26E9E51F19894D004C9512 /* Job.h */; };
 		0D26E9EB1F1D10E4004C9512 /* Store.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D26E9E91F1D10E4004C9512 /* Store.cpp */; };
 		0D26E9EC1F1D10E4004C9512 /* Store.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D26E9EA1F1D10E4004C9512 /* Store.h */; };
+		0D34D8DD2056CE84001F8E9A /* Matrices.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D34D8DC2056CE84001F8E9A /* Matrices.h */; };
 		0D69E1581E662B1E0019E312 /* libLua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D69E1571E662B1E0019E312 /* libLua.a */; };
 		0D69E15A1E662C3E0019E312 /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D69E1591E662C3E0019E312 /* libglfw3.a */; };
 		0D69E1651E6C4CC60019E312 /* Script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D69E1631E6C4CC60019E312 /* Script.cpp */; };
@@ -73,6 +74,7 @@
 		0D8D153C1DB1CBAB004C6C2C /* WindowHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D8D15071DB1CBAB004C6C2C /* WindowHandler.h */; };
 		0D8D15421DB27307004C6C2C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D8D15411DB27307004C6C2C /* OpenGL.framework */; };
 		0D8D15E21DB91973004C6C2C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D8D15E11DB91973004C6C2C /* Foundation.framework */; };
+		0D929A5420374A5B00073A48 /* AsyncTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D929A5320374A5B00073A48 /* AsyncTypes.cpp */; };
 		0DA1A1F31F6C329800C65D04 /* Transaction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DA1A1F11F6C329800C65D04 /* Transaction.cpp */; };
 		0DA1A1F41F6C329800C65D04 /* Transaction.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DA1A1F21F6C329800C65D04 /* Transaction.h */; };
 		0DA1A1F81F7B1B6800C65D04 /* BasicTransaction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DA1A1F61F7B1B6800C65D04 /* BasicTransaction.cpp */; };
@@ -108,6 +110,7 @@
 		0D26E9E51F19894D004C9512 /* Job.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Job.h; sourceTree = "<group>"; };
 		0D26E9E91F1D10E4004C9512 /* Store.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Store.cpp; sourceTree = "<group>"; };
 		0D26E9EA1F1D10E4004C9512 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
+		0D34D8DC2056CE84001F8E9A /* Matrices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrices.h; sourceTree = "<group>"; };
 		0D69E1571E662B1E0019E312 /* libLua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLua.a; path = "../../../../Library/Developer/Xcode/DerivedData/Xylena-dkuoppajznmpvsceyiptclqiufnn/Build/Products/Debug/libLua.a"; sourceTree = "<group>"; };
 		0D69E1591E662C3E0019E312 /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = ../Dependencies/glfw3/libglfw3.a; sourceTree = "<group>"; };
 		0D69E1631E6C4CC60019E312 /* Script.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Script.cpp; sourceTree = "<group>"; };
@@ -173,6 +176,7 @@
 		0D8D15411DB27307004C6C2C /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		0D8D157A1DB28F1A004C6C2C /* DefaultShaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultShaders.h; sourceTree = "<group>"; };
 		0D8D15E11DB91973004C6C2C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0D929A5320374A5B00073A48 /* AsyncTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AsyncTypes.cpp; sourceTree = "<group>"; };
 		0DA1A1F11F6C329800C65D04 /* Transaction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transaction.cpp; sourceTree = "<group>"; };
 		0DA1A1F21F6C329800C65D04 /* Transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transaction.h; sourceTree = "<group>"; };
 		0DA1A1F61F7B1B6800C65D04 /* BasicTransaction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BasicTransaction.cpp; sourceTree = "<group>"; };
@@ -226,6 +230,7 @@
 				0D26E9E11F16EE39004C9512 /* Worker.h */,
 				0D26E9E41F19894D004C9512 /* Job.cpp */,
 				0D26E9E51F19894D004C9512 /* Job.h */,
+				0D929A5320374A5B00073A48 /* AsyncTypes.cpp */,
 				0DA1A2101F90288200C65D04 /* AsyncTypes.h */,
 			);
 			name = Scheduling;
@@ -364,6 +369,7 @@
 		0DF784AA1E44AD5900FB21FA /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				0D34D8DC2056CE84001F8E9A /* Matrices.h */,
 				0DF784AB1E44AD7800FB21FA /* FileHandler.cpp */,
 				0DF784AC1E44AD7800FB21FA /* FileHandler.h */,
 			);
@@ -432,6 +438,7 @@
 				0D8D15091DB1CBAB004C6C2C /* Bounds.h in Headers */,
 				0DF784A91E3D804000FB21FA /* BasicPanel.h in Headers */,
 				0D8D152C1DB1CBAB004C6C2C /* StageCamera.h in Headers */,
+				0D34D8DD2056CE84001F8E9A /* Matrices.h in Headers */,
 				0D8D15161DB1CBAB004C6C2C /* InputComponent.h in Headers */,
 				0D8D15281DB1CBAB004C6C2C /* SpriteRenderComponent.h in Headers */,
 				0D26E9EC1F1D10E4004C9512 /* Store.h in Headers */,
@@ -513,6 +520,7 @@
 				0D8D150A1DB1CBAB004C6C2C /* ComponentHandler.cpp in Sources */,
 				0D8D153B1DB1CBAB004C6C2C /* WindowHandler.cpp in Sources */,
 				0DF7849F1E2ED04E00FB21FA /* Panel.cpp in Sources */,
+				0D929A5420374A5B00073A48 /* AsyncTypes.cpp in Sources */,
 				0D8D151D1DB1CBAB004C6C2C /* PhysicsHandler.cpp in Sources */,
 				0D8D150E1DB1CBAB004C6C2C /* Engine.cpp in Sources */,
 				0D26E9E21F16EE39004C9512 /* Worker.cpp in Sources */,
