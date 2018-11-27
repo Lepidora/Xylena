@@ -7,6 +7,9 @@ namespace Xylena {
 	class Engine {
 	private:
 		static GamePtr game;
+        
+        static void mainLoop();
+        
 	public:
 		Engine();
 		~Engine();

@@ -3,6 +3,8 @@
 //System includes
 #include <thread>
 #include <queue>
+#include <atomic>
+#include <mutex>
 
 //Local includes
 #include "AsyncTypes.h"
@@ -14,13 +16,16 @@ namespace Xylena {
         void runQueue();
         std::thread thread;
         std::queue<Task> taskQueue;
+        
+        std::mutex queueLock;
+        
+        std::atomic<bool> stopped;
     public:
         
+        Worker();
+        
         void start();
-        void pause();
-        void resume();
         void stop();
-        void halt();
         
         void enqueue(Task task);
     };

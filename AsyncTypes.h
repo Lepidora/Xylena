@@ -1,5 +1,24 @@
 #pragma once
 
-//Task and block definition
-#define Task std::function<void()>
-#define block(code) [](){code;}
+#include <functional>
+
+namespace Xylena {
+    
+    //Task type definition
+    #define TaskType std::function<void()>
+    #define block(code) [=](){code;}
+    
+    class Task {
+    private:
+        TaskType task;
+    public:
+        Task();
+        Task(TaskType taskRunnable);
+        
+        void execute();
+        
+        void operator()(){
+            //task();
+        }
+    };
+}

@@ -18,6 +18,7 @@
 #include "DefaultShaders.h"
 #include "EventHandler.h"
 #include "StageHandler.h"
+#include "Scheduler.h"
 
 #ifdef __APPLE__
 
@@ -44,6 +45,17 @@ namespace Xylena {
 
 	//Contains the main game loop. Called by the game that is passed in through initialize()
 	void Engine::run() {
+        
+        /*Scheduler::start();
+        
+        Scheduler::enqueueMain(block({
+            mainLoop();
+        }));*/
+        
+        mainLoop();
+    }
+    
+    void Engine::mainLoop() {
 
         //Profiler::start()
 
@@ -177,6 +189,9 @@ namespace Xylena {
         
 #endif
 
+        Scheduler::setMaxWorkers(Scheduler::hardwareThreads());
+        Scheduler::initialize();
+        
         Render::initRenderer();
 
 		game = _game;
