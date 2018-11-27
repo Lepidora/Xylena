@@ -178,8 +178,21 @@ namespace Xylena {
         ShaderHandler::attachShader(program, vertexShader);
         ShaderHandler::attachShader(program, fragmentShader);
 
-        return ShaderHandler::linkProgram(program, programName);
-
+        ShaderProgram linkedProgram = ShaderHandler::linkProgram(program, programName);
+        
+        int status;
+        glGetProgramiv(program, GL_LINK_STATUS, &status);
+        
+        if (status != GL_TRUE)
+        {
+            int logsize;
+            char infolog[1024] = { 0 };
+            glGetProgramInfoLog(program, 1024, &logsize, infolog);
+            
+            throw std::runtime_error(std::string("Shader linking failed :") + std::string(infolog));
+        }
+        
+        return linkedProgram;
     }
     
     ShaderProgram ShaderHandler::compileProgram(const char * programName, const char * vertexSource, const char * fragmentSource) {
@@ -224,5 +237,14 @@ namespace Xylena {
         }
 
         return uniform;
+    }
+    
+    void ShaderHandler::processErrors() {
+        
+        GLenum errs;
+        while((errs = glGetError()) != GL_NO_ERROR)
+        {
+            printf("GL error code: %d\n", errs);
+        }
     }
 }

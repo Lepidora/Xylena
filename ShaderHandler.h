@@ -50,5 +50,8 @@ namespace Xylena {
 
         ///Get uniform for shader program
         static ShaderUniform getUniform(ShaderProgram program, const char* uniformName);
+        
+        ///Display GL errors
+        static void processErrors();
     };
 }
